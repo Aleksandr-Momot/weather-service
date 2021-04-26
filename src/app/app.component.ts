@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeService } from './theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'weather';
+  constructor(private themeService: ThemeService) {}
+
+  toggle() {
+    const active = this.themeService.getActiveTheme() ;
+    if (active.name === 'light') {
+      this.themeService.setTheme('dark');
+    } else {
+      this.themeService.setTheme('light');
+    }
+  }
 }

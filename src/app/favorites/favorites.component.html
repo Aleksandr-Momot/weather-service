@@ -1,0 +1,8 @@
+<p>favorites works!</p>
+<div  class="weather-card">
+    <div *ngFor='let item of weather'>
+        <p>{{this.weather.LocalizedName}}</p>
+        <p>{{this.weather[0]?.Temperature?.Metric.Value}}<span>{{this.weather[0]?.Temperature.Metric.Unit}}</span></p>
+        <p>{{this.weather[0]?.WeatherText}}</p>
+    </div>
+</div>

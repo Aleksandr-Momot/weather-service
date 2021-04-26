@@ -1,0 +1,70 @@
+
+<div class="home-wrapper">
+    <div class="search-block">
+        <form [formGroup]='form' (ngSubmit)="sendWeather(form.value)">
+            <div class="search-group">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Search Location</mat-label>
+                    <input formControlName='location' type="text" matInput placeholder="Search locale">
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary">Search</button>
+            </div>
+        </form>
+        <div class="your-country">
+            <p>your location:</p>
+            <p>{{country?.city}}</p>
+        </div>
+    </div>
+    <div *ngIf='weather' class="main-weather-group">
+        <div class="weather-card" *ngFor='let item of weather'>
+            <div>
+                <h2>{{titleText}}</h2>
+                <p>{{this.weather.LocalizedName}}</p>
+                <p>{{this.weather[0]?.Temperature?.Metric.Value}}<span>{{this.weather[0]?.Temperature.Metric.Unit}}</span></p>
+                <p>{{this.weather[0]?.WeatherText}}</p>
+                <button (click)="addToFavorite()" type="submit" mat-raised-button color="primary">Add To Favorite</button>
+            </div>
+        </div>
+    </div>
+    <div class="info-five-days">
+        <div class="five-card-wrapper">
+            <div class="five-card">
+                <p>{{this.weatherFive?.DailyForecasts[0]?.Date | date}}</p>
+                <p>Maximum {{this.weatherFive?.DailyForecasts[0]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Minimum {{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+            </div>
+        </div>
+
+        <div class="five-card-wrapper">
+            <div class="five-card">
+                <p>{{this.weatherFive?.DailyForecasts[1]?.Date | date}}</p>
+                <p>Maximum {{this.weatherFive.DailyForecasts[1]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Minimum {{this.weatherFive.DailyForecasts[1]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+            </div>
+        </div>
+
+        <div class="five-card-wrapper">
+            <div class="five-card">
+                <p>{{this.weatherFive.DailyForecasts[2]?.Date | date}}</p>
+                <p>Maximum {{this.weatherFive.DailyForecasts[2]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Minimum {{this.weatherFive.DailyForecasts[2]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+            </div>
+        </div>
+
+        <div class="five-card-wrapper">
+            <div class="five-card">
+                <p>{{this.weatherFive.DailyForecasts[3]?.Date | date}}</p>
+                <p>Maximum {{this.weatherFive.DailyForecasts[3]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Minimum {{this.weatherFive.DailyForecasts[3]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+            </div>
+        </div>
+
+        <div class="five-card-wrapper">
+            <div class="five-card">
+                <p>{{this.weatherFive.DailyForecasts[4]?.Date | date}}</p>
+                <p>Maximum {{this.weatherFive.DailyForecasts[4]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Minimum {{this.weatherFive.DailyForecasts[4]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+            </div>
+        </div>
+    </div>
+</div>
