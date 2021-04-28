@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocaleName, Weather } from '../interfaces';
-import { PostsService } from '../weather.service';
+import { Weather} from '../interfaces';
+import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-favorites',
@@ -9,32 +9,19 @@ import { PostsService } from '../weather.service';
   styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
-
-  weather: Weather[]=[];
-
-  localeName: LocaleName[]=[];
-
-  locName: string;
+  weather: Weather[] = [];
 
   constructor(
-    private weatherService: PostsService,
+    private weatherService: WeatherService,
     private route: Router
   ) {}
 
   ngOnInit(): void {
-    this.weather = this.weatherService.weather
-
-    this.weatherService.getAutoComplete().subscribe( data => { 
-      this.localeName = data 
-      data[0].LocalizedName
-      
-      this.locName = data[0].LocalizedName
-      this.weatherService.getAutoComplete(this.locName).subscribe( data => {this.locName = data;})
-    })
+    this.weather = this.weatherService.weather;
   }
 
   getItWeather() {
-    this.route.navigate([''])
+    this.route.navigate(['']);
   }
 
 }

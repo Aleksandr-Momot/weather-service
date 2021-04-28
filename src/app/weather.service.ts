@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Weather } from './interfaces';
 
 @Injectable({ providedIn: 'root' })
-export class PostsService {
+export class WeatherService {
 
     weather: Weather[] = [];
 

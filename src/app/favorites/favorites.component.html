@@ -3,9 +3,9 @@
     <h2>Your Favorite Location</h2>
     <div class="weather-card">
         <div (click)='getItWeather()' *ngFor='let item of weather'>
-            <p>{{locName[0].LocalizedName}}</p>
+            <p class="locale-name">{{item.LocalizedName}}</p>
             <p>{{item.WeatherText}}</p>
-            <p>{{item.Temperature.Metric.Value}}</p>
+            <p>{{item.Temperature.Metric.Value}}{{item.Temperature.Metric.Unit}}</p>
         </div>
     </div>
 </div>

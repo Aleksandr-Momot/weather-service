@@ -10,6 +10,7 @@ export interface Weather {
     Unit: string;
     WeatherText: string;
     Key: string;
+    LocalizedName: string;
 }
 
 export interface WeatherFive {

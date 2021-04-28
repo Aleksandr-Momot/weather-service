@@ -1,22 +1,24 @@
-<div app-theme class="container">
-  <div class="header">
-    <div class="header-title">
-      <h2>
-        weather
-      </h2>
-      <div class="change-theme">
-        <span>Light</span>
-        <label class="switch">
-          <input (click)="toggle()" type="checkbox">
-          <span class="slider round"></span>
-        </label>
-        <span>Dark</span>
+<div app-theme class="wrapper">
+  <div class="container">
+    <div class="header">
+      <div class="header-title">
+        <h2>
+          weather
+        </h2>
+        <div class="change-theme">
+          <span>Light</span>
+          <label class="switch">
+            <input (click)="toggle()" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <span>Dark</span>
+        </div>
+      </div>
+      <div class="header-nav">
+        <a routerLink=''>Home</a>
+        <a routerLink='/favorites'>Favorites</a>
       </div>
     </div>
-    <div class="header-nav">
-      <a routerLink=''>Home</a>
-      <a routerLink='/favorites'>Favorites</a>
-    </div>
+    <router-outlet></router-outlet>
   </div>
-  <router-outlet></router-outlet>
 </div>
