@@ -1,4 +1,3 @@
-
 <div class="home-wrapper">
     <div class="search-block">
         <form [formGroup]='form' (ngSubmit)="sendWeather(form.value)">
@@ -14,56 +13,91 @@
             <p>your location:</p>
             <p>{{country?.city}}</p>
         </div>
+
+        <div class="timer your-country">
+            <p>Current Time</p>
+            <p>{{ time | date: 'HH:mm:ss' }}</p>
+        </div>
     </div>
     <div *ngIf='weather' class="main-weather-group">
         <div class="weather-card" *ngFor='let item of weather'>
             <div>
                 <h2>{{titleText}}</h2>
-                <p>{{this.weather.LocalizedName}}</p>
-                <p>{{this.weather[0]?.Temperature?.Metric.Value}}<span>{{this.weather[0]?.Temperature.Metric.Unit}}</span></p>
+                <p>{{this.localeName[0].LocalizedName}}</p>
+                <p>{{this.weather[0]?.Temperature?.Metric.Value}}<span>{{this.weather[0]?.Temperature.Metric.Unit}}</span>
+                </p>
                 <p>{{this.weather[0]?.WeatherText}}</p>
-                <button (click)="addToFavorite()" type="submit" mat-raised-button color="primary">Add To Favorite</button>
+                <div class="favorite-btn-group">
+                    <button (click)="addToFavorite(item);toggleFill()" type="submit" mat-raised-button color="warn">Add To Favorite</button>
+                    <p>
+                        <svg [ngClass]="{red: filling}" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="info-five-days">
+    <div *ngIf="weather.length" class="info-five-days">
         <div class="five-card-wrapper">
             <div class="five-card">
                 <p>{{this.weatherFive?.DailyForecasts[0]?.Date | date}}</p>
-                <p>Maximum {{this.weatherFive?.DailyForecasts[0]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
-                <p>Minimum {{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Maximum
+                    {{this.weatherFive?.DailyForecasts[0]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
+                <p>Minimum
+                    {{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
             </div>
         </div>
 
         <div class="five-card-wrapper">
             <div class="five-card">
                 <p>{{this.weatherFive?.DailyForecasts[1]?.Date | date}}</p>
-                <p>Maximum {{this.weatherFive.DailyForecasts[1]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
-                <p>Minimum {{this.weatherFive.DailyForecasts[1]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Maximum
+                    {{this.weatherFive.DailyForecasts[1]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
+                <p>Minimum
+                    {{this.weatherFive.DailyForecasts[1]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
             </div>
         </div>
 
         <div class="five-card-wrapper">
             <div class="five-card">
                 <p>{{this.weatherFive.DailyForecasts[2]?.Date | date}}</p>
-                <p>Maximum {{this.weatherFive.DailyForecasts[2]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
-                <p>Minimum {{this.weatherFive.DailyForecasts[2]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Maximum
+                    {{this.weatherFive.DailyForecasts[2]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
+                <p>Minimum
+                    {{this.weatherFive.DailyForecasts[2]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
             </div>
         </div>
 
         <div class="five-card-wrapper">
             <div class="five-card">
                 <p>{{this.weatherFive.DailyForecasts[3]?.Date | date}}</p>
-                <p>Maximum {{this.weatherFive.DailyForecasts[3]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
-                <p>Minimum {{this.weatherFive.DailyForecasts[3]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Maximum
+                    {{this.weatherFive.DailyForecasts[3]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
+                <p>Minimum
+                    {{this.weatherFive.DailyForecasts[3]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive?.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
             </div>
         </div>
 
         <div class="five-card-wrapper">
             <div class="five-card">
                 <p>{{this.weatherFive.DailyForecasts[4]?.Date | date}}</p>
-                <p>Maximum {{this.weatherFive.DailyForecasts[4]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
-                <p>Minimum {{this.weatherFive.DailyForecasts[4]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span></p>
+                <p>Maximum
+                    {{this.weatherFive.DailyForecasts[4]?.Temperature?.Maximum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
+                <p>Minimum
+                    {{this.weatherFive.DailyForecasts[4]?.Temperature?.Minimum?.Value}}<span>{{this.weatherFive.DailyForecasts[0]?.Temperature?.Minimum?.Unit}}</span>
+                </p>
             </div>
         </div>
     </div>

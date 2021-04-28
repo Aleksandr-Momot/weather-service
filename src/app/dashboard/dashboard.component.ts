@@ -1,41 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { Country, Weather, WeatherFive } from '../interfaces';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Country, LocaleName, Weather, WeatherFive } from '../interfaces';
 import { PostsService } from '../weather.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit{
   public form: FormGroup;
   country: Country;
   weather: Weather[]=[];
   weatherFive: WeatherFive;
   titleText = 'Currently weather'
-  LocalizedName: string;
-  Temperature: number;
-  Metric: number;
-  Value: number;
-  Unit: string;
-  WeatherText: string;
-  Key: string
-
-
+  localeName: LocaleName;
   locationValue: string;
+  locName: string;
+  filling: boolean = false;
+
+  localCity: any;
+  time = new Date();
+  timer: any;
   constructor(
     private weatherservice: PostsService,
     private formbuilder: FormBuilder,
-  ) { }
+  ) {
+   }
+
 
   ngOnInit(): void {
-    this.weatherservice.getCurrentWeather().subscribe(data => {
-      this.weather = data;
-    })
+    
+    // this.localCity = this.weatherservice.getAutoComplete()
+    // .subscribe(data => {
+    //   this.weather = data
+    //   data[0].LocalizedName
+    //   this.localCity = data[0].LocalizedName
+    // });
+
+    this.weatherservice.getAutoComplete().subscribe( data => {this.localeName = data;})
+
+    this.weatherservice.getCurrentWeather().subscribe( data => { this.weather = data;})
+
+    this.weatherservice.getFiveDayWeather().subscribe( data => { this.weatherFive = data;})
 
     this.form = this.formbuilder.group({
       location: ['']
@@ -43,23 +50,17 @@ export class DashboardComponent implements OnInit {
 
     this.weatherservice.getCurrentLocation().subscribe(data => this.country = data)
 
-    this.weatherservice.getFiveDayWeather().subscribe(data => { this.weatherFive = data; })
+    this.timer = setInterval(() => {
+      this.time = new Date();
+    }, 1000);
   }
 
-  addToFavorite() {
-    this.weatherservice.addToFavorite( {
-      LocalizedName: this.LocalizedName,
-      Temperature: this.Temperature,
-      Metric: this.Metric,
-      Value: this.Value,
-      Unit: this.Unit,
-      WeatherText: this.WeatherText,
-      Key: this.Key
-    }).subscribe( data => {
-      console.log('datadata', data);
-      this.weather.push(data)
-    })
-  
+  toggleFill(){
+    this.filling=!this.filling;
+  }
+
+  addToFavorite(item: any) {
+    this.weatherservice.getWeather(item)
   }
 
   sendWeather(formValues) {
@@ -68,10 +69,13 @@ export class DashboardComponent implements OnInit {
       .subscribe(data => {
         this.weather = data
         data[0].Key
+        data[0].LocalizedName
+        this.locName = data[0].LocalizedName
         this.locationValue = data[0].Key
+        console.log(data);
         this.weatherservice.getCurrentWeather(this.locationValue).subscribe( data => { this.weather = data});
         this.weatherservice.getFiveDayWeather(this.locationValue).subscribe( data => { this.weatherFive = data;})
-        console.log(this.weather);
+        this.weatherservice.getAutoComplete(this.locName).subscribe( data => {this.localeName = data;})
       });
   }
 }

@@ -54,6 +54,21 @@
                     font-size: 18px;
                     text-transform: uppercase;
                 }
+               .favorite-btn-group {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    border: none;
+                    p {
+                        margin: 0;
+                        svg {
+                            &.red {
+                                fill: red;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

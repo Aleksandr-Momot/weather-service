@@ -4,7 +4,6 @@ export interface Country {
 }
 
 export interface Weather {
-    LocalizedName: string;
     Temperature: number;
     Metric: number;
     Value: number;
@@ -14,7 +13,6 @@ export interface Weather {
 }
 
 export interface WeatherFive {
-    LocalizedName: string;
     DailyForecasts: any;
     Temperature: number;
     Metric: number;
@@ -23,4 +21,7 @@ export interface WeatherFive {
     WeatherText: string;
 }
 
+export interface LocaleName {
+    LocalizedName: string;
+}
 

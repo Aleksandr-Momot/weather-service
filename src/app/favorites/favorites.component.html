@@ -1,8 +1,11 @@
-<p>favorites works!</p>
-<div  class="weather-card">
-    <div *ngFor='let item of weather'>
-        <p>{{this.weather.LocalizedName}}</p>
-        <p>{{this.weather[0]?.Temperature?.Metric.Value}}<span>{{this.weather[0]?.Temperature.Metric.Unit}}</span></p>
-        <p>{{this.weather[0]?.WeatherText}}</p>
+
+<div *ngIf="weather.length" class="weather-card-wrapper">
+    <h2>Your Favorite Location</h2>
+    <div class="weather-card">
+        <div (click)='getItWeather()' *ngFor='let item of weather'>
+            <p>{{locName[0].LocalizedName}}</p>
+            <p>{{item.WeatherText}}</p>
+            <p>{{item.Temperature.Metric.Value}}</p>
+        </div>
     </div>
 </div>

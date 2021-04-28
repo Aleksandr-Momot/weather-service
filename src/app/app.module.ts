@@ -19,7 +19,7 @@ import {MatIconModule} from '@angular/material/icon';
   declarations: [
     AppComponent,
     DashboardComponent,
-    FavoritesComponent
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +38,7 @@ import {MatIconModule} from '@angular/material/icon';
     })
   ],
   exports: [
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
