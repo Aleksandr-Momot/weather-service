@@ -6,6 +6,7 @@
             <p class="locale-name">{{item.LocalizedName}}</p>
             <p>{{item.WeatherText}}</p>
             <p>{{item.Temperature.Metric.Value}}{{item.Temperature.Metric.Unit}}</p>
+            <button class="delete-btn" mat-raised-button color="warn" (click)='deleteCard(item)'>delete</button>
         </div>
     </div>
 </div>

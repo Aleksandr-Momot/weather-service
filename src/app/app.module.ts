@@ -15,6 +15,8 @@ import { darkTheme } from './theme/dark.theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,13 +34,13 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     FormsModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
       active: 'dark'
     })
   ],
   exports: [
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

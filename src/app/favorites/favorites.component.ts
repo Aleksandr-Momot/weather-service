@@ -24,4 +24,8 @@ export class FavoritesComponent implements OnInit {
     this.route.navigate(['']);
   }
 
+  deleteCard(item) {
+    this.weather.splice(this.weather.indexOf(item), 1)
+  }
+
 }
